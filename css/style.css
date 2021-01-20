@@ -1,0 +1,87 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+html{
+    background-image:url("../resources/assets/html-color-codes-color-tutorials-hero.jpg");
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-position: 100%;
+    
+}
+
+.welcome{
+    font-size: 48px;
+    margin: auto;
+    text-align: justify;
+}
+
+#welcomeMessage2{
+    margin-top: 1em;
+}
+
+.titulo{
+    margin-bottom: 1em;
+    font-size: 32px;
+    color: rgba(232, 242, 250, 0.671);
+}
+
+.container{
+    position: relative;
+    margin-top: 3em;
+    min-height: 100vh;
+}
+
+.glass{
+    border: 1px solid rgba(255, 255, 255, 0.466);
+    border-radius: 5px;
+    background-color:rgba(255, 255, 255, 0.459);
+    margin:auto;
+    padding: 1em;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 80px rgba(233, 139, 76, 0.692);
+}
+
+
+#wndInicioSesion{
+    width: 75%;
+}
+
+#wndRegistro{
+    width: 90%;
+}
+
+.glass button{
+    float: right;
+    transform: translateY(2em);
+    background-color: rgb(158, 255, 129) !important;
+}
+
+.glass input{
+    background-color: rgba(232, 242, 250, 0.9);
+}
+
+.error-msg{
+    color: red;
+    font-size: smaller;
+}
+
+#txtToS{
+    font-size: 9px;
+    text-align: right;
+}
+
+footer{
+    background-color:rgb(44, 44, 44);
+    position:relative;
+    /* bottom: 0; */
+    /* width: 100%; */
+    height: 10%;            /* Footer height */
+    padding: 5%;
+}
+
+#page-wrap{
+    padding-bottom: 35%;    /* Footer height */
+}
