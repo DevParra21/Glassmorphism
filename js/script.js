@@ -14,14 +14,52 @@ $(document).ready(function(){
 
     
     $("#btnIniciarSesion").click(function(){
-        if(ValidarDatosInicioSesion("#tbNombreUsuario","#tbContrasena"))
-            console.log("datos validados."); //Enviar HttpRequest
+        if(ValidarDatosInicioSesion("#tbNombreUsuario","#tbContrasena")){
+            let nombreUsuario = $("#tbNombreUsuario").val();
+            let contrasena = $("#tbContrasena").val();
+            $.ajax({
+                type: 'POST',
+                data: {
+                    action: 'login',
+                    reqNombreUsuario: nombreUsuario,
+                    reqContrasena: contrasena
+                },
+                url: "backend/index.php",
+                success: function (response) {
+                    alert(response);
+                }
+            });
+            // console.log("datos validados."); //Enviar HttpRequest
+        }
     });
 
     $("#btnRegistrar").click(function(){
         if(ValidarDatosRegistro("#tbNombreCompletoRegistro","#tbFechaNacimientoRegistro",
-        "#tbNombreUsuarioRegistro","#tbContrasenaRegistro"))
-            console.log("datos registrados"); //Enviar HttpReq
+        "#tbNombreUsuarioRegistro", "#tbCorreoElectronicoRegistro", "#tbContrasenaRegistro"))
+        {
+            let nombreCompleto = $("#tbNombreCompletoRegistro").val();
+            let fechaNacimiento = $("#tbFechaNacimientoRegistro").val();
+            let nombreUsuario = $("#tbNombreUsuarioRegistro").val();
+            let correoElectronico = $("#tbCorreoElectronicoRegistro").val();
+            let contrasena = $("tbContrasenaRegistro").val();
+
+            $.ajax({
+                type:'POST',
+                data:{
+                    action: 'signup',
+                    nombreCompleto:nombreCompleto,
+                    fechaNacimiento: fechaNacimiento,
+                    nombreUsuario: nombreUsuario,
+                    correoElectronico: correoElectronico,
+                    contrasena: contrasena
+                },
+                url: 'backend/index.php',
+                success: function(response){
+                    alert(response);
+                }
+            });
+        }
+            // console.log("datos registrados"); //Enviar HttpReq
     });
 
 
@@ -64,6 +102,10 @@ $(document).ready(function(){
         //Validar que no tenga espacios
     });
 
+    $("#tbCorreoElectronicoRegistro").focusout(function(){
+        ValidaDato(this,"#errorCorreoElectronicoRegistro");
+    })
+
     $("#tbContrasenaRegistro").focusout(function(){
         ValidaDato(this,"#errorContrasenaRegistro");
     });
@@ -83,6 +125,7 @@ function OcultarErrores(){
     OcultarElemento("#errorNombreCompletoRegistro");
     OcultarElemento("#errorFechaNacimientoRegistro");
     OcultarElemento("#errorNombreUsuarioRegistro");
+    OcultarElemento("#errorCorreoElectronicoRegistro");
     OcultarElemento("#errorContrasenaRegistro");
     return true;
 }
@@ -143,7 +186,7 @@ function ValidarDatosInicioSesion(nombreUsuarioP, contrasenaP){
     return !error;
 }
 
-function ValidarDatosRegistro(nombreCompletoP, fechaNacimientoP, nombreUsuarioP, contrasenaP){
+function ValidarDatosRegistro(nombreCompletoP, fechaNacimientoP, nombreUsuarioP, correoElectronicoP, contrasenaP){
     let error = false;
 
     if(!ValidaDato(nombreCompletoP,"#errorNombreCompletoRegistro"))
@@ -151,6 +194,8 @@ function ValidarDatosRegistro(nombreCompletoP, fechaNacimientoP, nombreUsuarioP,
     if(!ValidaDato(fechaNacimientoP,"#errorFechaNacimientoRegistro"))
         error = true;
     if(!ValidaDato(nombreUsuarioP,"#errorNombreUsuarioRegistro"))
+        error = true;
+    if(!ValidaDato(correoElectronicoP, "#errorCorreoElectronicoRegistro"))
         error = true;
     if(!ValidaDato(contrasenaP,"#errorContrasenaRegistro"))
         error = true;
